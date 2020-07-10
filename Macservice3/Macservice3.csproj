@@ -516,7 +516,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Employee\Models\" />
     <Folder Include="Areas\Employee\Views\Home_Em\" />
-    <Folder Include="Demo\" />
     <Folder Include="Uploads\Excels\" />
   </ItemGroup>
   <ItemGroup>
