@@ -1,0 +1,39 @@
+﻿@model Macservice3.Models.Phongban
+@using Macservice3.Models;
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Phongban_Ad">Quản lý phòng ban</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h3 class="mB-30" style="color:red">Bạn có chắc chắn muốn xóa phòng ban này?</h3>
+
+<div>
+    <hr />
+    <table class="table table-bordered table-bordered">
+        <tr>
+            <th>
+                Mã phòng ban
+            </th>
+            <th>Tên phòng ban</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(model => model.Maphongban)</td>
+            <td> @Html.DisplayFor(model => model.Tenphongban)</td>
+        </tr>
+    </table>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />&nbsp;
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

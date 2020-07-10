@@ -1,0 +1,198 @@
+﻿@model PagedList.IPagedList<Macservice3.Models.Chitietbangcong>
+@using Macservice3.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách chấm công của phòng ban";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+
+    Macservice db = new Macservice();
+    var Bangchamcong_Ad = db.Bangchamcongs.ToList();
+    var Phongban_Ad = db.Phongbans.ToList();
+    var Thongtinnhansu_Ad = db.Thongtinnhansus.ToList();
+
+}
+<ol class="breadcrumb">
+    <li><a href="/Admin/Bangchamcong_Ad">Quản lý bảng công</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2 class="mB-30">@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+<div class="row mB-15">
+    <div class="col-sm-3">
+        <a href="/Admin/Chitietbangcong_Ad/Create" class="btn btn-success">Thêm mới</a>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" name="manv">
+            <option value="0">Tất cả nhân viên</option>
+            @foreach (var item in Thongtinnhansu_Ad)
+            {
+                <option selected="@(item.Manv == ViewBag.Manv)" value="@item.Manv">@item.Manv</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" name="thang">
+            <option value="0">Tất cả tháng</option>
+            @foreach (var item in Bangchamcong_Ad)
+            {
+                <option selected="@(item.Thangchamcong == ViewBag.Thangchamcong)" value="@item.Thangchamcong">@item.Thangchamcong</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="input-group">
+            <input type="text" name="tukhoa" class="form-control" placeholder="Từ khóa..." value="@ViewBag.Tukhoa">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-bordered table-bordered table-bordered table-bordered table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã chi tiết bảng công </th>
+                <th>Mã nhân viên </th>
+                <th>Họ và tên </th>
+                <th>Phòng ban </th>
+                <th>Số giờ làm </th>
+                <th>Só giờ làm thêm ngày thường </th>
+                <th>Só giờ làm thêm ngày nghỉ </th>
+                <th>Só giờ làm thêm ngày lễ </th>
+                <th style="width:220px;">Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Machitietbangcong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Thongtinnhansu.Manv)
+                    @Html.DisplayFor(modelItem => item.Thongtinnhansu.Hoten)
+                    @Html.DisplayFor(modelItem => item.Phongban.Tenphongban)
+                    @*<p><small>Họ và tên: <b>@item.Thongtinnhansu.Hoten</b><br />Phòng ban: <b>@item.Phongban.Tenphongban</b></small></p>*@
+</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Thongtinnhansu.Hoten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phongban.Tenphongban)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sogiolam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sogiolamthemngaythuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sogiolamthemngaynghi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sogiolamthemngayle)
+                </td>
+
+                <td>
+                    <a href="/Admin/Chitietbangcong_Ad/Edit/@item.Mabangcong" class="btn btn-sm btn-primary">Sửa</a>&nbsp;
+                    <a href="/Admin/Chitietbangcong_Ad/Details/@item.Mabangcong" class="btn btn-sm btn-success">Chi tiết</a>
+                    <a href="/Admin/Chitietbangcong_Ad/Delete/@item.Mabangcong" class="btn btn-sm btn-danger">Xóa</a>
+
+                </td>
+            </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="10">Không có bản ghi nào.</td></tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+
+
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bangchamcong.Maphongban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phongban.Tenphongban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sogiolam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sogiolamthemngaythuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sogiolamthemngaynghi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sogiolamthemngayle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Songaynghiphep)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bangchamcong.Maphongban)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phongban.Tenphongban)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thongtinnhansu.Hoten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sogiolam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sogiolamthemngaythuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sogiolamthemngaynghi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sogiolamthemngayle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Songaynghiphep)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Machitietbangcong }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Machitietbangcong }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Machitietbangcong })
+            </td>
+        </tr>
+    }
+
+</table>*@

@@ -1,0 +1,62 @@
+﻿@model Macservice3.Models.Chitietkyluat
+
+@{
+    ViewBag.Title = "Chi tiết kỷ luật";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Chitietkyluat_Ad">Quản lý danh sách kỷ luật</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2>Chi tiết kỷ luật</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label>Mã chi tiết kỷ luật </label>
+                <input type="text" readonly="readonly" value='@(Model.Machitietkyluat)' class="form-control" />
+                @Html.ValidationMessageFor(model => model.Machitietkyluat, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                <label>Mã nhân viên <span style="color:red"></span></label>
+                <input type="text" readonly="readonly" value='@(Model.Manv)' class="form-control" />
+                @Html.ValidationMessageFor(model => model.Manv, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label>Tên nhân viên <span style="color:red"></span></label>
+                <input type="text" readonly="readonly" value='@(Model.Thongtinnhansu.Hoten)' class="form-control" />
+                @Html.ValidationMessageFor(model => model.Thongtinnhansu.Hoten, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Tên kỷ luật <span style="color:red"></span></label>
+                <input type="text" readonly="readonly" value='@(Model.Kyluat.Tenkyluat)' class="form-control" />
+                @Html.ValidationMessageFor(model => model.Kyluat.Tenkyluat, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Lý do kỷ luật <span style="color:red"></span></label>
+                <input type="text" readonly="readonly" value='@(Model.Lydokyluat)' class="form-control" />
+                @Html.ValidationMessageFor(model => model.Lydokyluat, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Tiền phạt <span style="color:red"></span></label>
+                <input type="text" readonly="readonly" value='@(Model.Tienphat)' class="form-control" />
+                @Html.ValidationMessageFor(model => model.Tienphat, "", new { @class = "text-danger" })
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <a href="/Admin/Chitietkyluat_Ad/Edit/@Model.Machitietkyluat" class="btn btn-sm btn-success">Cập nhật </a>
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@model Macservice3.Models.Baohiem
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Baohiem_Ad">Quản lý loại bảo hiểm</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<h2>Thêm mới loại bảo hiểm</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+           
+            <div class="form-group">
+                <label>Mã loại bảo hiểm<span style="color:red">*</span></label>
+                @Html.EditorFor(model => model.Mabaohiem, new { htmlAttributes = new { @class = "form-control", @required = "@required" } })
+                @Html.ValidationMessageFor(model => model.Mabaohiem, "", new { @class = "text-danger" })
+            </div>
+        <div class="form-group">
+                <label>Tên loại bảo hiểm<span style="color:red">*</span></label>
+                @Html.EditorFor(model => model.Tenbaohiem, new { htmlAttributes = new { @class = "form-control", @required = "@required" } })
+                @Html.ValidationMessageFor(model => model.Tenbaohiem, "", new { @class = "text-danger" })
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Thêm mới" class="btn btn-success" />
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+
+            </div>
+        }
+    </div>
+</div>

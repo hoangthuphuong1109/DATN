@@ -1,0 +1,163 @@
+﻿@model Macservice3.Models.Chitietbangcong
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li><a href="/Admin/Chitietbangcong_Ad">Quản lý danh sách bảng chấm công của phòng ban</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2>Thêm mới </h2>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label>Mã chi tiết bảng công <span style="color:red">*</span></label>
+                @Html.EditorFor(model => model.Machitietbangcong, new { htmlAttributes = new { @class = "form-control", @type = "textbox" } })
+                @Html.ValidationMessageFor(model => model.Machitietbangcong, "", new { @class = "text-danger" })
+            </div>
+            @*<div class="form-group">
+                <label>Phòng ban <span style="color:red">*</span></label>
+                @Html.DropDownList("Maphongban", null, "-Chọn phòng ban-", htmlAttributes: new { @class = "form-control", @required = "@required" })
+                @Html.ValidationMessageFor(model => model.Maphongban, "", new { @class = "text-danger" })
+            </div>*@
+            <div class="form-group">
+                <label>Mã nhân viên <span style="color:red">*</span></label>
+                @Html.DropDownList("Manv", null, "-Chọn nhân viên-", htmlAttributes: new { @class = "form-control", @required = "@required" })
+                @Html.ValidationMessageFor(model => model.Manv, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                <label>Năm<span style="color:red"></span></label>
+                @Html.EditorFor(model => model.Sogiolam, new { htmlAttributes = new { @class = "form-control", @type = "textbox" } })
+                @Html.ValidationMessageFor(model => model.Sogiolam, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Số giờ làm thêm ngày thường <span style="color:red"></span></label>
+                @Html.EditorFor(model => model.Sogiolamthemngaythuong, new { htmlAttributes = new { @class = "form-control", @type = "textbox" } })
+                @Html.ValidationMessageFor(model => model.Sogiolamthemngaythuong, "", new { @class = "text-danger" })
+            </div>
+             <div class="form-group">
+                 <label>Số giờ làm thêm ngày nghỉ <span style="color:red"></span></label>
+                @Html.EditorFor(model => model.Sogiolamthemngaynghi, new { htmlAttributes = new { @class = "form-control", @type = "textbox" } })
+                @Html.ValidationMessageFor(model => model.Sogiolamthemngaynghi, "", new { @class = "text-danger" })
+            </div>
+             <div class="form-group">
+                <label>Số giờ làm thêm ngày lễ <span style="color:red"></span></label>
+                @Html.EditorFor(model => model.Sogiolamthemngayle, new { htmlAttributes = new { @class = "form-control", @type = "textbox" } })
+                @Html.ValidationMessageFor(model => model.Sogiolamthemngayle, "", new { @class = "text-danger" })
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Thêm mới" class="btn btn-success" />
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@*<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Chitietbangcong</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Machitietbangcong, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Machitietbangcong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Machitietbangcong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Manv, "Manv", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Manv", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Manv, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mabangcong, "Mabangcong", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Mabangcong", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Mabangcong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sogiolam, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sogiolam, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sogiolam, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sogiolamthemngaythuong, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sogiolamthemngaythuong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sogiolamthemngaythuong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sogiolamthemngaynghi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sogiolamthemngaynghi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sogiolamthemngaynghi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sogiolamthemngayle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sogiolamthemngayle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sogiolamthemngayle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Songaynghiphep, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Songaynghiphep, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Songaynghiphep, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Maphongban, "Maphongban", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Maphongban", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Maphongban, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@

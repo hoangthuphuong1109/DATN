@@ -1,0 +1,114 @@
+﻿@model PagedList.IPagedList<Macservice3.Models.Hopdong>
+@using Macservice3.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách hợp đồng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    Macservice db = new Macservice();
+    var Loaihopdong_Ad = db.Loaihopdongs.ToList();
+    var Thongtinnhansu_Ad = db.Thongtinnhansus.ToList();
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Hopdong_Ad">Quản lý phòng ban</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2>Danh sách hợp đồng</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div class="row mB-15 ">
+        <div class="col-sm-5">
+            <a href="/Admin/Hopdong_Ad/Create" class="btn btn-success">Thêm mới</a>
+        </div>
+        <div class="col-sm-3">
+            <select class="form-control" name="maloaihopdong">
+                <option value="0">Tất cả loại hợp đồng</option>
+                @foreach (var item in Loaihopdong_Ad)
+                {
+                    <option selected="@(item.Maloaihopdong == ViewBag.Maloaihopdong)" value="@item.Maloaihopdong">@item.Tenloaihopdong</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="input-group">
+                <input type="text" name="tukhoa" class="form-control" placeholder="Từ khóa..." value="@ViewBag.Tukhoa">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-bordered table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã hợp đồng</th>
+                <th>Mã nhân viên</th>
+                <th>Họ và tên</th>
+                <th>Tên loại hợp đồng  </th>
+                <th>Ngày ký kết</th>
+                <th>Ngày kết thúc</th>
+                <th>Lương cơ bản</th>
+
+
+
+                <th style="width:180px;">Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mahopdong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Manv)
+                        </td>
+
+                        <td>
+                            @(item.Thongtinnhansu != null ? item.Thongtinnhansu.Hoten : "")
+                        </td>
+                        <td>
+                            @(item.Loaihopdong != null ? item.Loaihopdong.Tenloaihopdong : "")
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ngaykyket)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ngayketthuc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Luongcoban)
+                        </td>
+
+
+                        <td>
+                            <a href="/Admin/Hopdong_Ad/Edit/@item.Mahopdong" class="btn btn-sm btn-success">Sửa</a>
+                            <a href="/Admin/Hopdong_Ad/Details/@item.Mahopdong" class="btn btn-sm btn-primary">Chi tiết</a>
+                            <a href="/Admin/Hopdong_Ad/Delete/@item.Mahopdong" class="btn btn-sm btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="10">Không có bản ghi nào.</td></tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))

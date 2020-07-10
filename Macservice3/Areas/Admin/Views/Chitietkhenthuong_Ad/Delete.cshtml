@@ -1,0 +1,103 @@
+﻿@model Macservice3.Models.Chitietkhenthuong
+@using Macservice3.Models;
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    Macservice db = new Macservice();
+    var Khenthuong_Ad = db.Khenthuongs.ToList();
+    var Thongtinnhansu_Ad = db.Thongtinnhansus.ToList();
+}
+
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Chitietkhenthuong_Ad">Quản lý chi tiết khen thưởng</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h3 class="mB-30" style="color:red">Bạn có chắc chắn muốn xóa chi tiết khen thưởng này?</h3>
+<div>
+    <hr />
+    <table class="table table-bordered table-bordered table-bordered table-bordered ">
+        <tr>
+            <th>
+                Mã chi tiết khen thưởng
+            </th>
+            <th>Mã nhân viên </th>
+            <th>Họ và tên </th>
+            <th>Tên khen thưởng </th>
+            <th>Tiền thưởng </th>
+        </tr>
+        <tr>
+            <td>    @Html.DisplayFor(model => model.Machitietkhenthuong)</td>
+            <td>    @Html.DisplayFor(model => model.Thongtinnhansu.Manv)</td>
+            <td>    @Html.DisplayFor(model => model.Thongtinnhansu.Hoten)</td>
+            <td>    @Html.DisplayFor(model => model.Khenthuong.Tenkhenthuong)</td>
+            <td>    @Html.DisplayFor(model => model.Tienthuong)</td>
+        </tr>
+    </table>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />&nbsp;
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
+
+
+@*<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Chitietkhenthuong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Khenthuong.Tenkhenthuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Khenthuong.Tenkhenthuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thongtinnhansu.Hoten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lydokhenthuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lydokhenthuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tienthuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tienthuong)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>*@

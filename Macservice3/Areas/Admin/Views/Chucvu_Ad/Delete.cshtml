@@ -1,0 +1,39 @@
+﻿@model Macservice3.Models.Chucvu
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Chucvu_Ad">Quản lý chức vụ</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h3 class="mB-30" style="color:red">Bạn có chắc chắn muốn xóa chức vụ này?</h3>
+
+<div>
+    <hr />
+    <table class="table table-bordered table-bordered">
+        <tr>
+            <th>
+                Mã chức vụ
+            </th>
+            <th>Tên chức vụ</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(model => model.Machucvu)</td>
+            <td> @Html.DisplayFor(model => model.Tenchucvu)</td>
+        </tr>
+    </table>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />&nbsp;
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

@@ -1,0 +1,89 @@
+﻿@model Macservice3.Models.Bangchamcong
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li><a href="/Admin/Bangchamcong_Ad">Quản lý Danh sách chấm công</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h3 class="mB-30" style="color:red">Bạn có chắc chắn muốn xóa nội dung này?</h3>
+<div>
+    <hr />
+    <table class="table table-bordered table-bordered table-bordered table-bordered ">
+        <tr>
+            <th>
+                Mã bảng công
+            </th>
+            <th>Phòng ban </th>
+            <th>Năm </th>
+            <th>Tháng </th>
+        </tr>
+        <tr>
+            <td>    @Html.DisplayFor(model => model.Mabangcong)</td>
+            <td>    @Html.DisplayFor(model => model.Phongban.Tenphongban)</td>
+            <td>    @Html.DisplayFor(model => model.Nam)</td>
+            <td>    @Html.DisplayFor(model => model.Thangchamcong)</td>
+        </tr>
+    </table>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />&nbsp;
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
+
+
+
+
+@*<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Bangchamcong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Phongban.Tenphongban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phongban.Tenphongban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thangchamcong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thangchamcong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nam)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>*@

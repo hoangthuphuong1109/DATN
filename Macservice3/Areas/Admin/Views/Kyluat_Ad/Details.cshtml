@@ -1,0 +1,35 @@
+﻿@model Macservice3.Models.Kyluat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kyluat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tenkyluat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tenkyluat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quyetdinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quyetdinh)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Makyluat }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

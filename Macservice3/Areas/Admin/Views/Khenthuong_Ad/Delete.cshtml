@@ -1,0 +1,40 @@
+﻿@model Macservice3.Models.Khenthuong
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Khenthuong_Ad">Quản lý khen thưởng</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h3 class="mB-30" style="color:red">Bạn có chắc chắn muốn xóa khen thưởng này?</h3>
+
+<div>
+    <hr />
+    <table class="table table-bordered table-bordered table-bordered table-bordered ">
+        <tr>
+            <th>Mã khen thưởng </th>
+            <th>Tên khen thưởng</th>
+            <th>Quyết định </th>
+        </tr>
+        <tr>
+            <td> @Html.DisplayFor(model => model.Makhenthuong)</td>
+            <td> @Html.DisplayFor(model => model.Tenkhenthuong)</td>
+            <td> @Html.DisplayFor(model => model.Quyetdinh)</td>
+        </tr>
+    </table>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />&nbsp;
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+

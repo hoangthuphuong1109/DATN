@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<Macservice3.Models.Khenthuong>
+@using PagedList.Mvc;
+@{
+    /**/
+
+    ViewBag.Title = "Danh sách loại khen thưởng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li><a href="/Admin/Khenthuong_Ad">Quản lý khen thưởng</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2 class="mB-30">@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row mB-15">
+        <div class="col-sm-9">
+            <a href="/Admin/Khenthuong_Ad/Create" class="btn btn-success">Thêm mới</a>
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group">
+                <input type="text" name="tukhoa" class="form-control" placeholder="Từ khóa..." value="@ViewBag.Tukhoa">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-bordered table-bordered table-bordered table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã khen thưởng </th>
+                <th>Tên khen thưởng</th>
+
+                <th>Quyết định</th>
+                <th style="width:120px;">Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Makhenthuong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tenkhenthuong)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quyetdinh)
+                        </td>
+                        <td>
+                            <a href="/Admin/Khenthuong_Ad/Edit/@item.Makhenthuong" class="btn btn-sm btn-primary">Sửa</a>&nbsp;
+                            <a href="/Admin/Khenthuong_Ad/Delete/@item.Makhenthuong" class="btn btn-sm btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="5">Không có bản ghi nào.</td></tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+

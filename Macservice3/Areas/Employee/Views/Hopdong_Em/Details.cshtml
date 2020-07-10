@@ -1,0 +1,59 @@
+﻿@model Macservice3.Models.Hopdong
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Employee/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hopdong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Loaihopdong.Tenloaihopdong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loaihopdong.Tenloaihopdong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thongtinnhansu.Hoten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngaykyket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngaykyket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngayketthuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngayketthuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Luongcoban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Luongcoban)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Mahopdong }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

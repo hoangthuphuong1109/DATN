@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Macservice3.Models.Quatrinhluong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Employee/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Chucvu.Tenchucvu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phongban.Tenphongban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thoigian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Luongcoban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trocapchucvu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phucapkhac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Noidung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Luongdoanhso)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chucvu.Tenchucvu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phongban.Tenphongban)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thongtinnhansu.Hoten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thoigian)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Luongcoban)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trocapchucvu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phucapkhac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Noidung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Luongdoanhso)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Maquatrinhluong }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Maquatrinhluong }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Maquatrinhluong })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html> 
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Quản lý nhân sự Macservice</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Macservice", "Index", "Home_Ad", new { area = "Admin" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-list"></i> Quản lý danh mục <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Admin/Phongban_Ad">Phòng ban</a></li>
+                            <li><a href="/Admin/Chucvu_Ad">Chức vụ</a></li>
+                            <li><a href="/Admin/Trinhdo_chuyenmon_Ad">Trình độ chuyên môn</a></li>
+                            <li><a href="/Admin/Khenthuong_Ad">Khen thưởng</a></li>
+                            <li><a href="/Admin/Kyluat_Ad">Kỷ luật</a></li>
+                            <li><a href="/Admin/Loaihopdong_Ad">Hợp đồng</a></li>
+                            <li><a href="/Admin/Baohiem_Ad">Bảo hiểm</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-screenshot"></i>  Quản lý Nhân sự <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Admin/Thongtinnhansu_Ad">Thông tin nhân viên</a></li>
+                            <li><a href="/Demoes">Quá trình công tác</a></li>
+                            <li><a href="/Admin/Chitietkhenthuong_Ad">Khen thưởng</a></li>
+                            <li><a href="/Admin/Chitietkyluat_Ad">Kỷ luật</a></li>
+                            <li><a href="/Admin/Hopdong_Ad">Hợp đồng</a></li>
+                            <li><a href="/Admin/Chitietbaohiem_Ad">Bảo hiểm</a></li>
+                            <li><a href="/Admin/Dieudongcongtac_Ad">Điều động công tác </a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-calendar"></i>  QL Công và lương <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Admin/Bangchamcong_Ad">Chấm công</a></li>
+                            <li><a href="/Admin/Quatrinhluong_Ad">Quá trình lương</a></li>
+
+                        </ul>
+                    </li>
+
+                    @*<li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-stats"></i>  Báo cáo thống kê <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Bangchamcongs">Chấm công</a></li>
+                            <li><a href="/Quatrinhluongs">Quá trình lương</a></li>
+
+                        </ul>
+                    </li>*@ 
+                </ul>
+
+                @*  <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> @User.Tendangnhap <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Taikhoans/Edit/@user.Mataikhoan">Thông tin tài khoản</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Home/Logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                *@
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year -  Quản lý nhân sự công ty Macservice</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

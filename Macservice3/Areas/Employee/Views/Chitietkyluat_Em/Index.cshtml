@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Macservice3.Models.Chitietkyluat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Employee/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Kyluat.Tenkyluat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lydokyluat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tienphat)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kyluat.Tenkyluat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thongtinnhansu.Hoten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lydokyluat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tienphat)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Machitietkyluat }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Machitietkyluat }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Machitietkyluat })
+        </td>
+    </tr>
+}
+
+</table>

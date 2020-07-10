@@ -1,0 +1,106 @@
+﻿@model PagedList.IPagedList<Macservice3.Models.Chitietkyluat>
+@using Macservice3.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách kỷ luật";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    Macservice db = new Macservice();
+    var Kyluat_Ad = db.Kyluats.ToList();
+    var Thongtinnhansu_Ad = db.Thongtinnhansus.ToList();
+}
+<ol class="breadcrumb">
+    <li><a href="/Admin/Chitietkyluat_Ad">Quản lý danh sách kỷ luật</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2>Danh sách kỷ luật</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row mB-15 ">
+        <div class="col-sm-5">
+            <a href="/Admin/Chitietkyluat_Ad/Create" class="btn btn-success">Thêm mới</a>
+        </div>
+        <div class="col-sm-3">
+            <select class="form-control" name="makyluat">
+                <option value="0">Tất cả loại kỷ luật</option>
+                @foreach (var item in Kyluat_Ad)
+                {
+                    <option selected="@(item.Makyluat == ViewBag.Makyluat)" value="@item.Makyluat">@item.Tenkyluat</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group">
+                <input type="text" name="tukhoa" class="form-control" placeholder="Từ khóa..." value="@ViewBag.Tukhoa">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-bordered table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã chi tiết kỷ luật</th>
+                <th>Mã nhân viên</th>
+                <th>Họ và tên</th>
+                <th>Tên kỷ luật </th>
+                <th>Lý do kỷ luật</th>
+                <th>Tiền phạt</th>
+
+
+
+                <th style="width:180px;">Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Machitietkyluat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Thongtinnhansu.Manv)
+                        </td>
+
+                        <td>
+                            @(item.Thongtinnhansu != null ? item.Thongtinnhansu.Hoten : "")
+                        </td>
+                        <td>
+                            @(item.Kyluat != null ? item.Kyluat.Tenkyluat : "")
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lydokyluat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tienphat)
+                        </td>
+
+
+                        <td>
+                            <a href="/Admin/Chitietkyluat_Ad/Edit/@item.Machitietkyluat" class="btn btn-sm btn-success">Sửa</a>
+                            <a href="/Admin/Chitietkyluat_Ad/Details/@item.Machitietkyluat" class="btn btn-sm btn-primary">Chi tiết</a>
+                            <a href="/Admin/Chitietkyluat_Ad/Delete/@item.Machitietkyluat" class="btn btn-sm btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="10">Không có bản ghi nào.</td></tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))

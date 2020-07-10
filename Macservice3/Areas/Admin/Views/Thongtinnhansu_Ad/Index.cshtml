@@ -1,0 +1,132 @@
+﻿@model PagedList.IPagedList<Macservice3.Models.Thongtinnhansu>
+@using Macservice3.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách nhân sự";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    Macservice db = new Macservice();
+    var Chucvu_Ad = db.Chucvus.ToList();
+    var Phongban_Ad = db.Phongbans.ToList();
+    var Trinhdo_chuyenmon_Ad = db.Trinhdo_chuyenmon.ToList();
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Thongtinnhansu_Ad">Quản lý thông tin nhân sự</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2 class="mB-30">@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row mB-15">
+        <div class="col-sm-2">
+            <a href="/Admin/Thongtinnhansu_Ad/Create" class="btn btn-success">Thêm mới</a>
+        </div>
+        <div class="col-sm-2">
+            <select class="form-control" name="maPhongBan">
+                <option value="0">Tất cả phòng ban</option>
+                @foreach (var item in Phongban_Ad)
+                {
+                    <option selected="@(item.Maphongban == ViewBag.Maphongban)" value="@item.Maphongban">@item.Tenphongban</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <select class="form-control" name="maChucVu">
+                <option value="0">Tất cả chức vụ</option>
+                @foreach (var item in Chucvu_Ad)
+                {
+                    <option selected="@(item.Machucvu == ViewBag.Machucvu)" value="@item.Machucvu">@item.Tenchucvu</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <select class="form-control" name="maChucVu">
+                <option value="0">Tất cả trình độ chuyên môn</option>
+                @foreach (var item in Trinhdo_chuyenmon_Ad)
+                {
+                    <option selected="@(item.Matrinhdochuyenmon == ViewBag.Matrinhdochuyenmon)" value="@item.Matrinhdochuyenmon">@item.Tentrinhdochuyenmon</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group">
+                <input type="text" name="tukhoa" class="form-control" placeholder="Từ khóa..." value="@ViewBag.Tukhoa">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-bordered table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã nhân viên</th>
+                <th>Họ và tên</th>
+                <th>Phòng ban</th>
+                    <th>Chức vụ</th>
+                    <th>Trình độ chuyên môn</th>
+                <th>Ngày sinh</th>
+                @*<th>Số điện thoại</th>*@
+                <th>Email</th>
+
+
+                <th style="width:180px;">Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Manv)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hoten)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Chucvu.Tenchucvu)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phongban.Tenphongban)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Trinhdo_chuyenmon.Tentrinhdochuyenmon)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ngaysinh)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.SDT)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                        <td>
+                            <a href="/Admin/Thongtinnhansu_Ad/Edit/@item.Manv" class="btn btn-sm btn-success">Sửa</a>
+                            <a href="/Admin/Thongtinnhansu_Ad/Details/@item.Manv" class="btn btn-sm btn-primary">Chi tiết</a>
+                            <a href="/Admin/Thongtinnhansu_Ad/Delete/@item.Manv" class="btn btn-sm btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="10">Không có bản ghi nào.</td></tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+
+

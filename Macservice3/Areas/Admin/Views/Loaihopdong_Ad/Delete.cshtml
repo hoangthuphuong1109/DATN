@@ -1,0 +1,39 @@
+﻿@model Macservice3.Models.Loaihopdong
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Loaihopdong_Ad">Quản lý loại hợp đồng</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h3 class="mB-30" style="color:red">Bạn có chắc chắn muốn xóa loại hợp đồng này?</h3>
+
+<div>
+    <hr />
+    <table class="table table-bordered table-bordered">
+        <tr>
+            <th>
+                Mã loại hợp đồng
+            </th>
+            <th>Tên loại hợp đồng</th>
+        </tr>
+        <tr>
+            <td> @Html.DisplayFor(model => model.Maloaihopdong)</td>
+            <td> @Html.DisplayFor(model => model.Tenloaihopdong)</td>
+        </tr>
+    </table>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />&nbsp;
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

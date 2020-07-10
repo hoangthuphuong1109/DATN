@@ -1,0 +1,226 @@
+﻿@model PagedList.IPagedList<Macservice3.Models.Quatrinhluong>
+@using Macservice3.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách quá trình lương ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    Macservice db = new Macservice();
+
+    var Thongtinnhansu_Ad = db.Thongtinnhansus.ToList();
+    var Phongban_Ad = db.Phongbans.ToList();
+    var Chucvu_Ad = db.Chucvus.ToList();
+    var Trinhdo_chuyenmon_Ad = db.Trinhdo_chuyenmon.ToList();
+}
+
+
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Chitietkhenthuong_Ad">Quản lý danh sách khen thưởng</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2>Danh sách quá trình lương</h2>
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+<div class="row mB-15 ">
+    <div class="col-sm-5">
+        <a href="/Admin/Chitietkhenthuong_Ad/Create" class="btn btn-success">Thêm mới</a>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" name="makhenthuong">
+            <option value="0">Tất cả phòng ban</option>
+            @foreach (var item in Phongban_Ad)
+            {
+                <option selected="@(item.Maphongban == ViewBag.Maphongban)" value="@item.Maphongban">@item.Maphongban</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" name="makhenthuong">
+            <option value="0">Tất cả chức vụ</option>
+            @foreach (var item in Chucvu_Ad)
+            {
+                <option selected="@(item.Machucvu == ViewBag.Machucvu)" value="@item.Machucvu">@item.Machucvu</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" name="makhenthuong">
+            <option value="0">Tất cả trình độ chuyên môn</option>
+            @foreach (var item in Trinhdo_chuyenmon_Ad)
+            {
+                <option selected="@(item.Matrinhdochuyenmon == ViewBag.Matrinhdochuyenmon)" value="@item.Matrinhdochuyenmon">@item.Matrinhdochuyenmon</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" name="makhenthuong">
+            <option value="0">Tất cả nhân viên</option>
+            @foreach (var item in Thongtinnhansu_Ad)
+            {
+                <option selected="@(item.Manv == ViewBag.Manv)" value="@item.Manv">@item.Manv</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <input type="text" name="tukhoa" class="form-control" placeholder="Từ khóa..." value="@ViewBag.Tukhoa">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-bordered table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã quá trình lương</th>
+                <th>Mã nhân viên</th>
+                <th>Họ và tên</th>
+                <th>Mã phòng ban </th>
+                <th>Mã Chức vụ </th>
+                <th>Mã Trình độ chuyên môn </th>
+                <th>Thời gian</th>
+                <th>Lương cơ bản</th>
+                <th>Trợ cấp chức vụ</th>
+                <th>Trợ cấp khác</th>
+                <th>Lương doanh số</th>
+                <th>Nội dung</th>
+
+
+
+                <th style="width:180px;">Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Maquatrinhluong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manv)
+                </td>
+
+                <td>
+                    @(item.Thongtinnhansu != null ? item.Thongtinnhansu.Hoten : "")
+                </td>
+                <td>
+                    @(item.Phongban != null ? item.Phongban.Tenphongban : "")
+                </td>
+                <td>
+                    @(item.Chucvu != null ? item.Chucvu.Tenchucvu : "")
+                </td>
+                @*<td>
+                    @(item.T != null ? item.Phongban.Tenphongban : "")
+                </td>*@
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Lydokhenthuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tienthuong)
+                </td>*@
+
+
+                @*<td>
+                    <a href="/Admin/Chitietkhenthuong_Ad/Edit/@item.Machitietkhenthuong" class="btn btn-sm btn-success">Sửa</a>
+                    <a href="/Admin/Chitietkhenthuong_Ad/Details/@item.Machitietkhenthuong" class="btn btn-sm btn-primary">Chi tiết</a>
+                    <a href="/Admin/Chitietkhenthuong_Ad/Delete/@item.Machitietkhenthuong" class="btn btn-sm btn-danger">Xóa</a>
+                </td>*@
+            </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="10">Không có bản ghi nào.</td></tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Chucvu.Tenchucvu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phongban.Tenphongban)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thoigian)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Luongcoban)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trocapchucvu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phucapkhac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Noidung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Luongdoanhso)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chucvu.Tenchucvu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phongban.Tenphongban)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Thongtinnhansu.Hoten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Thoigian)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Luongcoban)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trocapchucvu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phucapkhac)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Noidung)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Luongdoanhso)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Maquatrinhluong }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Maquatrinhluong }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Maquatrinhluong })
+                </td>
+            </tr>
+        }
+
+    </table>*@

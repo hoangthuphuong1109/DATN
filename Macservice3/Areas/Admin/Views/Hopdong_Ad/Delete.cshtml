@@ -1,0 +1,112 @@
+﻿@model Macservice3.Models.Hopdong
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Hopdong_Ad">Quản lý danh sách hợp đồng</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h3 class="mB-30" style="color:red">Bạn có chắc chắn muốn xóa hợp đồng này?</h3>
+
+<div>
+    <hr />
+    <table class="table table-bordered table-bordered table-bordered table-bordered ">
+        <tr>
+            <th>
+                Mã hợp đồng
+            </th>
+            <th>Mã nhân viên </th>
+            <th>Họ và tên </th>
+            <th>Tên loại hợp đồng </th>
+            <th>Ngày ký kết </th>
+            <th>Ngày kết thúc </th>
+            <th>Lương cơ bản </th>
+        </tr>
+        <tr>
+            <td>    @Html.DisplayFor(model => model.Mahopdong)</td>
+            <td>    @Html.DisplayFor(model => model.Thongtinnhansu.Manv)</td>
+            <td>    @Html.DisplayFor(model => model.Thongtinnhansu.Hoten)</td>
+            <td>    @Html.DisplayFor(model => model.Loaihopdong.Tenloaihopdong)</td>
+            <td>    @Html.DisplayFor(model => model.Ngaykyket)</td>
+            <td>    @Html.DisplayFor(model => model.Ngayketthuc)</td>
+            <td>    @Html.DisplayFor(model => model.Luongcoban)</td>
+        </tr>
+    </table>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />&nbsp;
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+@*<div>
+    <h4>Hopdong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Loaihopdong.Tenloaihopdong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loaihopdong.Tenloaihopdong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thongtinnhansu.Hoten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngaykyket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngaykyket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngayketthuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngayketthuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Luongcoban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Luongcoban)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>*@

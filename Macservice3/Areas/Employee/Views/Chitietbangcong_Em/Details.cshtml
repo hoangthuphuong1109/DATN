@@ -1,0 +1,83 @@
+﻿@model Macservice3.Models.Chitietbangcong
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Employee/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chitietbangcong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bangchamcong.Maphongban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bangchamcong.Maphongban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phongban.Tenphongban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phongban.Tenphongban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thongtinnhansu.Hoten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thongtinnhansu.Hoten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sogiolam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sogiolam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sogiolamthemngaythuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sogiolamthemngaythuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sogiolamthemngaynghi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sogiolamthemngaynghi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sogiolamthemngayle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sogiolamthemngayle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Songaynghiphep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Songaynghiphep)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Machitietbangcong }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,166 @@
+﻿@model Macservice3.Models.Thongtinnhansu
+
+@{
+    ViewBag.Title = "Cập nhật";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/Admin/Thongtinnhansu_Ad">Quản lý thông tin nhân sự</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<h2 class="mB-30">Cập nhật thông tin nhân sự</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Thông tin chung</h4>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Manv)
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Mã nhân viên <span style="color:red">*</span></label>
+                        <input type="text" readonly="readonly" value='@(Model.Manv)' class="form-control" />
+                        @Html.ValidationMessageFor(model => model.Manv, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Họ và tên <span style="color:red">*</span></label>
+                        @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control", @required = "@required" } })
+                        @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Phòng ban<span style="color:red">*</span></label>
+                        @Html.DropDownList("Maphongban", null, "-Chọn phòng ban-", htmlAttributes: new { @class = "form-control", @required = "@required" })
+                        @Html.ValidationMessageFor(model => model.Maphongban, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Chức vụ<span style="color:red">*</span></label>
+                        @Html.DropDownList("Machucvu", null, "-Chọn chức vụ-", htmlAttributes: new { @class = "form-control", @required = "@required" })
+                        @Html.ValidationMessageFor(model => model.Machucvu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Trình độ chuyên môn <span style="color:red">*</span></label>
+                        @Html.DropDownList("Matrinhdochuyenmon", null, "-Chọn trình độc chuyên môn-", htmlAttributes: new { @class = "form-control", @required = "@required" })
+                        @Html.ValidationMessageFor(model => model.Matrinhdochuyenmon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;height:1px;background-color:#ddd;margin-bottom:10px;"></div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Ngày sinh <span style="color:red">*</span></label>
+                        @Html.EditorFor(model => model.Ngaysinh, new { htmlAttributes = new { @class = "form-control", @type = "date", @required = "@required", @Value = (Model.Ngaysinh != null ? (DateTime.Parse(Model.Ngaysinh.ToString())).ToString("yyyy-MM-dd") : "") } })
+                        @Html.ValidationMessageFor(model => model.Ngaysinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Số điện thoại <span style="color:red">*</span></label>
+                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", @type = "textbox", @required = "@required" } })
+                        @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Giới tính <span style="color:red">*</span></label>
+                        @*  <select class="form-control" onchange="$('#Gioitinh').val($(this).val())">
+                                <option></option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select> *@
+                        @Html.EditorFor(model => model.Gioitinh, new { htmlAttributes = new { @class = "form-control ", @required = "@required" } })
+                        @Html.ValidationMessageFor(model => model.Gioitinh, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Dân tộc <span style="color:red">*</span></label>
+                        @Html.EditorFor(model => model.Dantoc, new { htmlAttributes = new { @class = "form-control", @required = "@required" } })
+                        @Html.ValidationMessageFor(model => model.Dantoc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Email <span style="color:red">*</span></label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "@required" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Nơi sinh <span style="color:red">*</span></label>
+                        @Html.TextAreaFor(model => model.Noisinh, new { @class = "form-control", @required = "@required" })
+                        @Html.ValidationMessageFor(model => model.Noisinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Hộ khẩu thường trú</label>
+                        @Html.TextAreaFor(model => model.Hokhauthuongtru, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Hokhauthuongtru, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Nơi ở hiện tại</label>
+                        @Html.TextAreaFor(model => model.Noiohientai, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Noiohientai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;height:1px;background-color:#ddd;margin-bottom:10px;"></div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Số CMND <span style="color:red">*</span></label>
+                        @Html.EditorFor(model => model.CMND, new { htmlAttributes = new { @class = "form-control", @type = "textbox", @required = "@required" } })
+                        @Html.ValidationMessageFor(model => model.CMND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Ngày cấp</label>
+                        @Html.EditorFor(model => model.Ngaycap, new { htmlAttributes = new { @class = "form-control", @type = "date", @typeof = "textbox", @Value = (Model.Ngaycap != null ? (DateTime.Parse(Model.Ngaycap.ToString())).ToString("yyyy-MM-dd") : "") } })
+                        @Html.ValidationMessageFor(model => model.Ngaycap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Nơi cấp</label>
+                        @Html.EditorFor(model => model.Noicap, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Noicap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="form-group">
+            <input type="submit" value="Cập nhật" class="btn btn-success" />
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
