@@ -225,6 +225,7 @@
     <Compile Include="Areas\Admin\Controllers\Chitietphongban_AdController.cs" />
     <Compile Include="Areas\Admin\Controllers\Chitiettrinhdochuyenmon_AdController.cs" />
     <Compile Include="Areas\Admin\Controllers\Chucvu_AdController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DemosController.cs" />
     <Compile Include="Areas\Admin\Controllers\Dieudongcongtac_AdController.cs" />
     <Compile Include="Areas\Admin\Controllers\Home_AdController.cs" />
     <Compile Include="Areas\Admin\Controllers\Hopdong_AdController.cs" />
@@ -244,9 +245,11 @@
     <Compile Include="Areas\Employee\Controllers\Chitietkyluat_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Chitietphongban_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Chitiettrinhdochuyenmon_EmController.cs" />
+    <Compile Include="Areas\Employee\Controllers\Chucvu_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Dieudongcongtac_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Home_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Hopdong_EmController.cs" />
+    <Compile Include="Areas\Employee\Controllers\Phongban_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Quatrinhluong_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Role_EmController.cs" />
     <Compile Include="Areas\Employee\Controllers\Taikhoan_EmController.cs" />
@@ -476,6 +479,18 @@
     <Content Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Demos\Upload.cshtml" />
+    <Content Include="Areas\Admin\Views\Chitietbangcong_Ad\Upload.cshtml" />
+    <Content Include="Areas\Employee\Views\Phongban_Em\Create.cshtml" />
+    <Content Include="Areas\Employee\Views\Phongban_Em\Delete.cshtml" />
+    <Content Include="Areas\Employee\Views\Phongban_Em\Details.cshtml" />
+    <Content Include="Areas\Employee\Views\Phongban_Em\Edit.cshtml" />
+    <Content Include="Areas\Employee\Views\Phongban_Em\Index.cshtml" />
+    <Content Include="Areas\Employee\Views\Chucvu_Em\Create.cshtml" />
+    <Content Include="Areas\Employee\Views\Chucvu_Em\Delete.cshtml" />
+    <Content Include="Areas\Employee\Views\Chucvu_Em\Details.cshtml" />
+    <Content Include="Areas\Employee\Views\Chucvu_Em\Edit.cshtml" />
+    <Content Include="Areas\Employee\Views\Chucvu_Em\Index.cshtml" />
     <None Include="DataSet1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

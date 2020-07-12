@@ -1,4 +1,4 @@
-namespace Macservice3.Models
+﻿namespace Macservice3.Models
 {
     using System;
     using System.Collections.Generic;
@@ -29,6 +29,7 @@ namespace Macservice3.Models
         public string Manv { get; set; }
 
         [StringLength(50)]
+        [MaxLength(50, ErrorMessage = "Độ dài tối đa là 50 ký tự")]
         public string Hoten { get; set; }
 
         [Column(TypeName = "date")]
@@ -36,6 +37,7 @@ namespace Macservice3.Models
         public DateTime? Ngaysinh { get; set; }
 
         [StringLength(50)]
+        [MaxLength(10, ErrorMessage = "Độ dài tối đa là 10 ký tự")]
         public string SDT { get; set; }
 
         [StringLength(50)]
